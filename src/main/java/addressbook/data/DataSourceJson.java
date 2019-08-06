@@ -48,4 +48,9 @@ public class DataSourceJson implements DataSource {
         }
         return result;
     }
+
+    @Override
+    public CustomerInfo getPersonById(int id) {
+        return null;
+    }
 }

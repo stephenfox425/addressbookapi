@@ -39,4 +39,9 @@ public class CustomerInformationControllerImpl implements CustomerInformationCon
         sanitisedCustomer.setSurname(customerInfo.getSurname());
         return sanitisedCustomer;
     }
+
+    @Override
+    public CustomerInfo getCustomerById(int id) {
+        return dataSource.getPersonById(id);
+    }
 }

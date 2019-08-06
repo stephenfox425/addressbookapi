@@ -3,6 +3,7 @@ package addressbook.controller;
 import addressbook.data.DataSource;
 import addressbook.model.CustomerInfo;
 import addressbook.model.SanitisedCustomer;
+import addressbook.util.ModelUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -16,7 +17,7 @@ import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CustomerInformationControllerTest {
+public class CustomerInformationControllerImplTest {
 
     @Mock
     private DataSource dataSourceMock;
@@ -76,6 +77,16 @@ public class CustomerInformationControllerTest {
         customerInfoList.add(oshea);
 
         return customerInfoList;
+    }
+
+    private final CustomerInfo stephenCustomerInfo() {
+        CustomerInfo stephen = new CustomerInfo();
+        stephen.setId(1);
+        stephen.setForeName("Stephen");
+        stephen.setSurname("Fox");
+        stephen.setAddress("");
+        stephen.setContactNumber("");
+        return stephen;
     }
 
     @Test
@@ -143,6 +154,30 @@ public class CustomerInformationControllerTest {
         when(dataSourceMock.getCustomers()).thenReturn(sampleCustomerInfo());
         List<SanitisedCustomer> result = CustomerInformationControllerImpl.searchBySurname("");
         List<SanitisedCustomer> expectedResponse = new ArrayList<>();
+        assertEquals(expectedResponse, result);
+    }
+
+    @Test
+    public void testLookupByValidValueReturnsRequestedCustomer() {
+        when(dataSourceMock.getPersonById(1)).thenReturn(stephenCustomerInfo());
+        CustomerInfo result = CustomerInformationControllerImpl.getCustomerById(1);
+        CustomerInfo expectedResponse = stephenCustomerInfo();
+        assertEquals(expectedResponse, result);
+    }
+
+    @Test
+    public void testLookupByInvalidValueReturnsBadCustomer() {
+        when(dataSourceMock.getPersonById(111)).thenReturn(ModelUtils.badCustomerInfo());
+        CustomerInfo result = CustomerInformationControllerImpl.getCustomerById(111);
+        CustomerInfo expectedResponse = ModelUtils.badCustomerInfo();
+        assertEquals(expectedResponse, result);
+    }
+
+    @Test
+    public void testLookupByNegativeValueReturnsBadCustomer() {
+        when(dataSourceMock.getPersonById(-1)).thenReturn(ModelUtils.badCustomerInfo());
+        CustomerInfo result = CustomerInformationControllerImpl.getCustomerById(-1);
+        CustomerInfo expectedResponse = ModelUtils.badCustomerInfo();
         assertEquals(expectedResponse, result);
     }
 }

@@ -7,4 +7,6 @@ import java.util.List;
 public interface DataSource {
 
     List<CustomerInfo> getCustomers();
+
+    CustomerInfo getPersonById(int id);
 }
