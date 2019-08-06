@@ -11,3 +11,8 @@ In order to search the customer information, use the endpoint:
 localhost:8080/search/{surname}
 
 The search also works for a partial surname.
+
+In order to lookup a specific customers full contact information once you have their ID using the search endpoint, you can use the following:
+localhost:8080/lookup/{customerId}
+
+lookup only takes integer values, anythign else will throw an error.
