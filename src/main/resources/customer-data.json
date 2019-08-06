@@ -1,0 +1,44 @@
+[
+  {
+    "id":1,
+    "foreName":"Stephen",
+    "surname":"Fox",
+    "address":"1 High Street, Alfriston, UK",
+    "contactNumber":"0123456789"
+  },
+  {
+    "id":2,
+    "foreName":"Gary",
+    "surname":"Fox",
+    "address":"1 High Street, Alfriston, UK",
+    "contactNumber":"0123456781"
+  },
+  {
+    "id":3,
+    "foreName":"Stephen",
+    "surname":"Hawking",
+    "address":"3 High Street, Alfriston, UK",
+    "contactNumber":"0123456782"
+  },
+  {
+    "id":4,
+    "foreName":"Stephen",
+    "surname":"King",
+    "address":"12 somewhere in America, USA",
+    "contactNumber":"0123456783"
+  },
+  {
+    "id":5,
+    "foreName":"Lionel",
+    "surname":"Messi",
+    "address":"1 Barcelona way, Barcelona",
+    "contactNumber":"0123456784"
+  },
+  {
+    "id":6,
+    "foreName":"John",
+    "surname":"O'Shea",
+    "address":"1 Dublin way, Ireland",
+    "contactNumber":"0123456786"
+  }
+]
