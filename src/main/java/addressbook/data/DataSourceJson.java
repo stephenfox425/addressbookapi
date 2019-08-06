@@ -1,6 +1,7 @@
 package addressbook.data;
 
 import addressbook.model.CustomerInfo;
+import addressbook.util.ModelUtils;
 import org.springframework.stereotype.Service;
 
 import java.io.FileReader;
@@ -51,6 +52,10 @@ public class DataSourceJson implements DataSource {
 
     @Override
     public CustomerInfo getPersonById(int id) {
-        return null;
+        List<CustomerInfo> customers = getCustomerInfoFromJSON();
+        return customers.stream()
+                .filter(cust -> cust.getId() == id)
+                .findFirst()
+                .orElse(ModelUtils.badCustomerInfo());
     }
 }

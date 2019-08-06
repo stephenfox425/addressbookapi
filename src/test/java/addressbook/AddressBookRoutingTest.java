@@ -60,4 +60,29 @@ public class AddressBookRoutingTest {
                 .andExpect(status().is(404));
     }
 
+    @Test
+    public void testLookupByValidIdReturnsData() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/lookup/{customerId}", 1).accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{\"id\":1,\"foreName\":\"Stephen\",\"surname\":\"Fox\",\"address\":\"1 High Street, Alfriston, UK\",\"contactNumber\":\"0123456789\"}"));
+    }
+
+    @Test
+    public void testLookupByInvalidIdReturnsNothing() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/lookup/{customerId}", 1).accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(400));
+    }
+
+    @Test
+    public void testLookupByInvalidValuesReturnsError() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/lookup/{customerId}", "someString").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(400));
+    }
+
+    @Test
+    public void testAttemptTohitInvalidUrlReturnsError() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/searche/{surname}", "someString").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(404));
+    }
+
 }
